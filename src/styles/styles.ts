@@ -39,5 +39,14 @@ export const Header = styled.header`
 `
 
 export const Menu = styled.section`
+  margin-top: 2.81rem;
+  margin-bottom: 2.81rem;
 
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.8rem;
+  }
 `
