@@ -17,7 +17,7 @@ export const menuArray = [
       id: 2,
       name: "Beer",
       ingredients: ["grain, hops, yeast, water"],
-      price: 12,
+      price: 10,
       icon: "src/assets/beer-icon.png"
   }
 ]
