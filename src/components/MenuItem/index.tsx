@@ -1,10 +1,12 @@
 import { Button, Ingredients, Item, ItemDescription, ItemName, Price } from './styles'
 
 interface MenuItemProps {
+  id: number
   name: string
   ingredients: string[]
   price: number,
-  icon: string
+  icon: string,
+  action: (id: number) => void
 }
 
 export function MenuItem(item : MenuItemProps) {
@@ -16,7 +18,7 @@ export function MenuItem(item : MenuItemProps) {
         <Ingredients>{item.ingredients.join(', ')}</Ingredients>
         <Price>{item.price}</Price>
       </ItemDescription>
-      <Button type='button'>+</Button>
+      <Button onClick={() => item.action(item.id)} type='button'>+</Button>
     </Item>
   )
 }
