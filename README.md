@@ -4,9 +4,9 @@ A solo mini project for Scrimba Frontend course module 5.
 
 ## Requirements
 
-* [ ] Follow the design spec
-* [ ] Render the menu options
-* [ ] Be able to add/remove items
+* [x] Follow the design spec
+* [x] Render the menu options
+* [x] Be able to add/remove items
 * [ ] Have a payment modal with compulsory form inputs
 
 ## Stretch Goals
