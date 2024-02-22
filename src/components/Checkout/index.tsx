@@ -2,11 +2,12 @@ import type { ItemList } from '../../App'
 import { CheckoutBase, CheckoutButton, HighlightText, PriceTag, RemoveButton, TotalPrice } from './styles'
 
 interface CheckoutProps {
-  itemList: ItemList[],
+  itemList: ItemList[]
+  totalValue: number
   removeItem: (id: string) => void
 }
 
-export function Checkout({ itemList, removeItem }: CheckoutProps) {
+export function Checkout({ itemList, totalValue, removeItem }: CheckoutProps) {
   return (
     <CheckoutBase>
       <span className='order'>Your Order</span>
@@ -30,7 +31,7 @@ export function Checkout({ itemList, removeItem }: CheckoutProps) {
         </ul>
         <TotalPrice>
           <HighlightText>Total Price:</HighlightText>
-          <PriceTag>$26</PriceTag>
+          <PriceTag>{totalValue}</PriceTag>
         </TotalPrice>
         <CheckoutButton>
           <span>Complete Order</span>

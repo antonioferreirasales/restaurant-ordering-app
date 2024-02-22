@@ -20,6 +20,11 @@ export function App() {
 const [clientOrder, setClientOrder] = useState<ItemList[]>([])
 const hasCheckoutItems = clientOrder.length >= 1 ? true : false
 
+const totalInitialValue = 0
+const totalValue = clientOrder
+  .map(item => item.price)
+  .reduce((accumulator, currentValue) => accumulator + currentValue, totalInitialValue)
+
 function addItemToOrder(itemId: string) {
   const item: ItemList | undefined = menuArray.find((item) => {
     return item.id === itemId
@@ -67,6 +72,7 @@ function removeItemToOrder(itemId: string) {
         { hasCheckoutItems && 
         <Checkout 
           itemList={clientOrder}
+          totalValue={totalValue}
           removeItem={removeItemToOrder}
        />}
       </Main>
