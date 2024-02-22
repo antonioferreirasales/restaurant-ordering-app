@@ -1,12 +1,12 @@
 import { Button, Ingredients, Item, ItemDescription, ItemName, Price } from './styles'
 
 interface MenuItemProps {
-  id: number
+  id: string
   name: string
   ingredients: string[]
   price: number,
   icon: string,
-  action: (id: number) => void
+  action: (id: string) => void
 }
 
 export function MenuItem(item : MenuItemProps) {

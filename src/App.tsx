@@ -5,10 +5,10 @@ import { Header, Main, Menu } from './styles/styles'
 import { menuArray } from './Data/menu'
 import { MenuItem } from './components/MenuItem'
 import { useState } from 'react'
-import { CheckoutBase, CheckoutButton, HighlightText, PriceTag, RemoveButton, TotalPrice } from './components/Checkout/styles'
+import { Checkout } from './components/Checkout'
 
-interface ItemList {
-  id: number
+export interface ItemList {
+  id: string
   name: string
   ingredients: string[]
   price: number,
@@ -16,16 +16,26 @@ interface ItemList {
 }
 
 export function App() {
+
 const [clientOrder, setClientOrder] = useState<ItemList[]>([])
 const hasCheckoutItems = clientOrder.length >= 1 ? true : false
-function addItemToOrder(itemId: number) {
+
+function addItemToOrder(itemId: string) {
   const item: ItemList | undefined = menuArray.find((item) => {
     return item.id === itemId
   })
 
   if(item) {
-    setClientOrder([...clientOrder, item])
+    const newIdItem = {
+      ...item,
+      id: `${item.id}-${(clientOrder.length + 1)}`
+    }
+    setClientOrder([...clientOrder, newIdItem])
   }
+}
+
+function removeItemToOrder(itemId: string) {
+  setClientOrder(prevOrder => prevOrder.filter(item => item.id !== itemId));
 }
 
   return (
@@ -54,42 +64,14 @@ function addItemToOrder(itemId: number) {
             })}
           </ul>
         </Menu>
-        { hasCheckoutItems ? <Checkout /> : ''}
+        { hasCheckoutItems && 
+        <Checkout 
+          itemList={clientOrder}
+          removeItem={removeItemToOrder}
+       />}
       </Main>
       <GlobalStyle />
     </ThemeProvider>
   )
-
-  function Checkout() {
-    let totalPriceOrder = 0
-    clientOrder.forEach(client => totalPriceOrder = client.price)
-    return (
-      <CheckoutBase>
-        <span className='order'>Your Order</span>
-        <div>
-          <ul>
-            { clientOrder.map((item) => {
-              return (
-                <li>
-                  <div className='item-name'>
-                    <HighlightText>{item.name}</HighlightText>
-                    <RemoveButton>remove</RemoveButton>
-                  </div>
-                  <PriceTag>{item.price}</PriceTag>
-                </li>
-              )
-            }) }
-          </ul>
-          <TotalPrice>
-            <HighlightText>Total Price:</HighlightText>
-            <PriceTag>${totalPriceOrder}</PriceTag>
-          </TotalPrice>
-          <CheckoutButton>
-            <span>Complete Order</span>
-          </CheckoutButton>
-        </div>
-      </CheckoutBase>
-    )
-  }
 }
 
